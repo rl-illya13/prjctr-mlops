@@ -64,10 +64,11 @@ Trained model is assumed as research project. So it is considered as public data
 
 ### 5.6. Monitoring & Alarms
 Because of cloud agnostic deployment the following technologies are initial target
-  - grafana
-  - prometeus
-  - ELK (optional)
- But this is yet clear how good is the given tech stack to ML Ops. 
+- grafana
+- prometeus
+- ELK (optional)
+
+But this is yet clear how good is the given tech stack to ML Ops.
 
 ### 5.7. Cost
 $300-500 per month
@@ -88,19 +89,19 @@ Infra cost
 ## 6. Appendix
 
 ### 6.1. Alternatives
-TBD
+TBD: What alternatives did you consider and exclude? List pros and cons of each alternative and the rationale for your decision.
 
 ### 6.2. Experiment Results
-TBD
+TBD: Share any results of offline experiments that you conducted.
 
 ### 6.3. Performance benchmarks
-TBD
+TBD: Share any performance benchmarks you ran (e.g., throughput vs. latency vs. instance size/count).
 
 ### 6.4. Milestones & Timeline
-The goal to have working prototype in 2-3 month
+TBD: What are the key milestones for this system and the estimated timeline?
 
 ### 6.5. Glossary
-TBD
+TBD: Define and link to business or technical terms.
 
 ### 6.6. References
 - [RL @illya13](https://illya13.github.io/RL/)
