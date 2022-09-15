@@ -4,13 +4,15 @@
 Design, develop and deploy into Production Reinforcement Learning based Game Bot agent.       
 
 ## 2. Motivation & Success metrics
-It is expected that such bots will get much better scores in game environments like https://dojorena.io/.
+It is expected that such bots will get much better game scores in game environments like https://dojorena.io/. 
+
+Usually game environments has several games to choose and each game has own rules. Bots represented the players participate in a game and play against each other by following game rules. In case of some successful actions bots are nominated with game bonuses. The sum of such bonuses gives game score and the goal for the bot is to maximize such game score.        
 
 ## 3. Requirements & Constraints
 Game Bots are doing actions selection at game time. Utilizing Machine Learning should give extra information for making better decisions what action to select in given situation. It is also very interesting to get some feedback about budget and time constrains required to run such systems in production. 
 At the beginning we have the following constrains:
 - Game Bot response time (decision) < 1s
-- Infra budget: $300-500
+- Infra budget: $300-500 per month 
 
 ### 3.1 What's in-scope & out-of-scope?
 Image (game screen) recognition is out of scope. We consider we could get game information in structured text format. 
@@ -25,7 +27,20 @@ We assume that the game consists of limited number of steps. Each step have a ga
 Set of game histories is our input data.
 
 ### 4.3. Techniques
-What machine learning techniques will you use? How will you clean and prepare the data (e.g., excluding outliers) and create features?
+The standard way to solve the problem is to give an opportunity to a developer to design and implement the bot in a code as set of strategies. But sometimes (always) it is hard to find the right balance between them. Also, it is not clear how to integrate the `learning`. Again the standard way is to change the code.     
+
+Recent deep reinforcement learning strategies have been able to deal with high-dimensional continuous state spaces through complex heuristics.
+The games such as Atari, Chess and sudoku are incredibly difficult for humans to master and to make the machines perform well at tasks, which are known to represent human intellect is a phenomenal achievement. These models have shown great improvement in the past couple of years, assuring that reinforcement learning will finally get the attention it deserves.
+
+Reinforcement Learning has four essential elements:
+- Agent. The program you train, with the aim of doing a job you specify.
+- Environment. The world, real or virtual, in which the agent performs actions.
+- Action. A move made by the agent, which causes a status change in the environment.
+- Rewards. The evaluation of an action, which can be positive or negative.
+
+In our case Game Bot is an Agent, Game Environment is an Environment, possible bots actions in a game are our Actions and potential game bonuses are our Rewards.     
+
+Observer (see High-level design below) will collect individual game steps over public API (json over websockets). It will save it as set of game histories. Later such game histories should be normalized, batched and passed to the Training Loop. It is expected that Machine Learning will help to select best game action.   
 
 ### 4.4. Experimentation & Validation
 Game Bot and related ML models will be evaluating in some online game environments. As such games are quite random - some repeatable set of experiments will be used for a given model.   
@@ -71,7 +86,26 @@ Because of cloud agnostic deployment the following technologies are initial targ
 But this is yet clear how good is the given tech stack to ML Ops.
 
 ### 5.7. Cost
-$300-500 per month
+Cost breakdown:
+- storage
+  - our storage will slowly increase with more and more game histories. We do not expect that we will be able to run too many experiments
+  - we also need some storage for ML-model with some backups
+  - options:
+    - kubernetes-based (pod) DB instance like PostgreSQL
+    - file-based database
+    - shared folders with set of files: csv / json / yaml / xml
+- compute:
+  - kubernetes cluster: 3..5 nodes
+  - in case of increasing/decreasing load we can change number of kubernetes nodes
+  - ML-compute: one training in a time
+  - other
+ 
+- total: $300-500 per month
+- breakdown:
+  - storage: $50 
+  - compute
+    - kubernetes: $100-200
+    - ML-compute: $100-250 (no real experience)
 
 ### 5.8. Integration points
 Game Environment is our main integration point. Usually this is a custom real-time JSON over Web Sockets protocol.
@@ -86,23 +120,6 @@ Model evaluation accuracy
 Training time
 Infra cost
 
-## 6. Appendix
-
-### 6.1. Alternatives
-TBD: What alternatives did you consider and exclude? List pros and cons of each alternative and the rationale for your decision.
-
-### 6.2. Experiment Results
-TBD: Share any results of offline experiments that you conducted.
-
-### 6.3. Performance benchmarks
-TBD: Share any performance benchmarks you ran (e.g., throughput vs. latency vs. instance size/count).
-
-### 6.4. Milestones & Timeline
-TBD: What are the key milestones for this system and the estimated timeline?
-
-### 6.5. Glossary
-TBD: Define and link to business or technical terms.
-
-### 6.6. References
+## 6. References
 - [RL @illya13](https://illya13.github.io/RL/)
 - [Coding DOJO](https://dojorena.io/)
