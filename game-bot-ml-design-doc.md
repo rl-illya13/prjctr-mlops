@@ -6,7 +6,14 @@ Design, develop and deploy into Production Reinforcement Learning based Game Bot
 ## 2. Motivation & Success metrics
 It is expected that such bots will get much better game scores in game environments like https://dojorena.io/. 
 
-Usually game environments has several games to choose and each game has own rules. Bots represented the players participate in a game and play against each other by following game rules. In case of some successful actions bots are nominated with game bonuses. The sum of such bonuses gives game score and the goal for the bot is to maximize such game score.        
+Usually game environments has several games to choose and each game has own rules. Bots represented the players participate in a game and play against each other by following game rules. In case of some successful actions bots are nominated with game bonuses. The sum of such bonuses gives game score and the goal for the bot is to maximize such game score.
+
+Success metrics: 
+- *formally* - if we get better game score then we are doing better.
+- *theoretically* - we expect that ML-based Game Bot should get better scores in a game environment than other bots.
+- *practically* - we have a lot of risks why that could not happen. See 5.9. Risks & Uncertainties
+- *pragmatic approach* - we can assume we have already a human-implemented `ML-ready` Game Bot. By saying `ML-ready` we mean - it contains a set of features or/and strategies to be selected for a given situation. The default behaviour could be random or hardcode. The goal of ML is to optimize a feature or strategy selection.
+- *way of the samurai* - any steps we do toward the goal are valuable for us in this project.
 
 ## 3. Requirements & Constraints
 Game Bots are doing actions selection at game time. Utilizing Machine Learning should give extra information for making better decisions what action to select in given situation. It is also very interesting to get some feedback about budget and time constrains required to run such systems in production. 
