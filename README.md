@@ -7,3 +7,5 @@ Projector :: Machine Learning in Production
     - [Named Entity-Recognition & Sentiment Analysis ML Design Doc](ner-sa-ml-design-doc.md)
 - Infrastructure setup
     - [PR 1](containers/hw2/README.md) 
+    - [PR 2](.github/workflows/build-n-push_prjctr-mlops-hw2_image_to_docker-hub.yml) 
+    - [PR 3](k8s/hw2/README.md) 
